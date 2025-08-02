@@ -1,0 +1,6 @@
+numpy
+scipy
+polars
+pandas
+biopython
+tqdm
