@@ -1,6 +1,6 @@
 
 from Bio.SeqIO import parse
-from snappy.src.seq_processing import gen_variants, letter_codes, letter_codes_rev
+from snappy.src.seq_processing import gen_variants, letter_codes, letter_codes_rev, letter_codes_to_check
 import re    
 from scipy.stats import mode
 import pandas as pd
@@ -35,8 +35,7 @@ MODKIT_COLNAMES = (
         'n_diff',
         'n_nocall',
     )
-
-
+    
 canonical_bases = ['A', 'C', 'G', 'T']
 
 re_to_degenerate = {
@@ -399,7 +398,7 @@ def gen_position_specific_variants(template, pos):
     symbol = template[pos]
 
     s_templates = []
-    for t in letter_codes[symbol]:
+    for t in letter_codes_to_check[symbol]:
         s_templates.append(
             template[:pos] + t + template[pos+1:]
         )
@@ -516,16 +515,17 @@ def curate_motif(template, central_base, modkit_df, metric_thrs=0.87):
 
         if len(pos_hits) > 0:
             template = sorted(pos_hits, reverse=True, key=lambda x: x[1])[0][0]
-            subvariant_hits = []
+        
+        
+        subvariant_hits = []
+        for t in gen_position_specific_variants(template, pos):
+            t_sdf = _modkit_local.filter(_modkit_local['context'].str.contains(get_re_from_degenerate(t)))
+            is_uniformic, metric = get_modality(t_sdf, t)
 
-
-            for t in gen_position_specific_variants(template, pos):
-                t_sdf = _modkit_local.filter(_modkit_local['context'].str.contains(get_re_from_degenerate(t)))
-                is_uniformic, metric = get_modality(t_sdf, t)
-
-                if metric >= metric_thrs:
-                    subvariant_hits.append(t)
-            template = unite_motifs(subvariant_hits)
+            print (t, metric)
+            if metric >= metric_thrs:
+                subvariant_hits.append(t)
+        template = unite_motifs(subvariant_hits)
 
 
         corrected_segment = template[:pos + 1] + '.'*(31 - pos - 1)
