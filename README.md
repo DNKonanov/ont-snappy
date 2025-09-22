@@ -40,7 +40,7 @@ samtools index OBJECT.mapped.bam
 
 4. Running Modkit:
 ```
-modkit pileup -t 32 OBJECT.mapped.bam OBJECT_modkit.bed -r OBJECT_assembly --only-tabs --filter-threshold 0.66
+modkit pileup -t 32 OBJECT.mapped.bam OBJECT_modkit.bed -r OBJECT_assembly/assembly.fasta --only-tabs --filter-threshold 0.66
 ```
 
 5. Running Snappy:
