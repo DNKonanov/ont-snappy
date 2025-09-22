@@ -17,7 +17,7 @@ def main():
     parser.add_argument('-mk_bed', 
                         type=str, 
                         required=True, 
-                        help='BED-file resulring from "modkit pileup"')
+                        help='BED-file resulting from "modkit pileup"')
     parser.add_argument('-genome', 
                         type=str, 
                         required=True, 

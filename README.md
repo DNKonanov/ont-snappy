@@ -27,7 +27,7 @@ dorado basecaller dna_r10.4.1_e8.2_400bps_sup@v5.0.0 pod5/ --modified-bases-mode
 > [!IMPORTANT]
 > If there is more than one barcode in raw pod5s, you should specify `--kit-name` for the Dorado basecaller, and run `dorado demux`after basecalling so to generate BAM-file with target reads.  
 
-2. Obtaining genome assembly with Flye, if it's nessesary:
+2. Obtaining a genome assembly with Flye, if it's nessesary:
 ```
 samtools fastq OBJECT.bam | flye -t 32 -o OBJECT_assembly -nano-raw -
 ```
