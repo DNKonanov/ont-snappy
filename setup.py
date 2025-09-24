@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="ont-snappy",
-    version="0.1.3",
+    version="0.1.5",
     author="D.N. Konanov",
     author_email="konanovdmitriy@gmail.com",
     description="Nanopore-based methylation sites caller",

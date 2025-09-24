@@ -83,32 +83,37 @@ def main():
     df = m4.filter(m4['frac_mod'] > FRAC_MOD_THR)
     results['21839'] = enrichment(df, m4, dict_freq_cntr, 'C', MIN_NUM_CONTEXTS=MIN_NUM_CONTEXTS)
 
-    summary_table, results_table, regular_code = prepare_output(results, modkit_df)
+
+    if len(results['a']) + len(results['m']) + len(results['21839']) == 0:
+        print('Methylation motifs were not identified!')
+
+    else:
+        summary_table, results_table, regular_code = prepare_output(results, modkit_df)
 
 
-    print('                       PREPARING THE OUTPUT                        ')
-    print('===================================================================')
-    
-    summary_table.write_csv(f'{out}/Summary_table.tsv', separator="\t")
-    results_table.write_csv(f'{out}/Results_table.tsv', separator="\t")
+        print('                       PREPARING THE OUTPUT                        ')
+        print('===================================================================')
+        
+        summary_table.write_csv(f'{out}/Summary_table.tsv', separator="\t")
+        results_table.write_csv(f'{out}/Results_table.tsv', separator="\t")
 
-    # Create advanced out
-    try:        
-        os.mkdir(f'{out}/advanced_res')
-    
-    except FileExistsError:
+        # Create advanced out
+        try:        
+            os.mkdir(f'{out}/advanced_res')
+        
+        except FileExistsError:
 
-        print('The output directory already exists!')
+            print('The output directory already exists!')
 
-    regular_code.write_csv(f'{out}/advanced_res/Reg_exp.tsv', separator="\t")
-    modkit_df.write_csv(f'{out}/advanced_res/Modkit_tab.tsv', separator="\t")
+        regular_code.write_csv(f'{out}/advanced_res/Reg_exp.tsv', separator="\t")
+        modkit_df.write_csv(f'{out}/advanced_res/Modkit_tab.tsv', separator="\t")
 
-    os.mkdir(out + '/VIZ/')
-    create_viz(results, modkit_df, out)
+        os.mkdir(out + '/VIZ/')
+        create_viz(results, modkit_df, out)
 
-    
-    print('                               DONE!                               ')
-    print('===================================================================')
+        
+        print('                               DONE!                               ')
+        print('===================================================================')
 
 if __name__ == "__main__":
     main()
