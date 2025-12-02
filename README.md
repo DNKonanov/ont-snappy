@@ -63,4 +63,4 @@ snappy -mk_bed [MicrobeMod output]/*_low.bed -genome [genome.fasta] -outdir snap
 
 ## Citation
 
-Dmitry N Konanov, Danil V Krivonos, Validislav V Babenko, Elena N Ilina. **Snappy: *de novo* identification of DNA methylation sites based on Oxford Nanopore reads**. *bioRxiv* 2025.08.03.668330; [Link to preprint](https://doi.org/10.1101/2025.08.03.668330)
+Dmitry N Konanov, Danil V Krivonos, Vladislav V Babenko, Elena N Ilina. **Snappy: fast identification of DNA methylation motifs based on Oxford Nanopore reads**, *Bioinformatics Advances*, 2025;, vbaf296, [DOI](https://doi.org/10.1093/bioadv/vbaf296)
