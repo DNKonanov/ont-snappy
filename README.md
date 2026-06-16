@@ -11,7 +11,7 @@ Snappy is mainly designed to work with data obtained from ONT r10.4.1 flow cells
 Snappy is availabe in PyPi:
 
 ```
-(base) $ conda create -n snappy python=3.12
+(base) $ conda create -n snappy python=3.12 pandas=2.2.3
 (base) $ conda activate snappy
 (snappy) $ pip install ont-snappy
 ```
